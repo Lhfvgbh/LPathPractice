@@ -43,14 +43,14 @@ public class CommonJLoadScenarioProvider {
     private static List<Provider<InvocationListener>> commonInvocationListeners() {
         return new ArrayList<>(Arrays.asList(
                 new NotNullInvocationListener(),
-                new DurationInvocationListener()));
+                new DurationInvocationListener(),
+                new ResponseSizeInvocationListener()));
     }
 
     private static List<ResponseValidatorProvider> commonResponseValidators() {
         return new ArrayList<>(Arrays.asList(
                 DefaultResponseValidatorProvider.of(NotNullResponseValidator.class),
-                new StatusCodeValidatorProvider(),
-                new ResponseTimeValidatorProvider()));
+                new StatusCodeValidatorProvider()));
     }
 
     @Autowired
@@ -69,6 +69,7 @@ public class CommonJLoadScenarioProvider {
                 .addValidator(new JSONResponseTypeValidatorProvider())
                 .addValidators(commonResponseValidators())
                 .addListener(new ResponseHeadersInvocationListener())
+                .addListener(new ResponseArgumentsInvocationListener())
                 .addListeners(commonInvocationListeners())
                 .build();
 
@@ -132,6 +133,7 @@ public class CommonJLoadScenarioProvider {
                 .withQueryProvider(new QueryProvider(properties.getResponseTestPath()))
                 .withLoadBalancer(new OneByOneLoadBalancer())
                 .addValidator(new JSONResponseTypeValidatorProvider())
+                .addValidator(new EmptyKeyValidatorProvider())
                 .addValidators(commonResponseValidators())
                 .addListener(new ResponseContentLengthInvocationListener())
                 .addListeners(commonInvocationListeners())

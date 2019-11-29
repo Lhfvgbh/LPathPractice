@@ -17,7 +17,6 @@ import com.griddynamics.jagger.user.test.configurations.termination.JTermination
 import com.griddynamics.jagger.user.test.configurations.termination.auxiliary.IterationsNumber;
 import com.griddynamics.jagger.user.test.configurations.termination.auxiliary.MaxDurationInSeconds;
 import jagger.validators.JSONResponseTypeValidatorProvider;
-import jagger.validators.ResponseTimeValidatorProvider;
 import jagger.validators.StatusCodeValidatorProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,9 +41,10 @@ public class GetJLoadScenarioProvider {
                 .addValidator(DefaultResponseValidatorProvider.of(NotNullResponseValidator.class))
                 .addValidator(new StatusCodeValidatorProvider())
                 .addValidator(new JSONResponseTypeValidatorProvider())
-                .addValidator(new ResponseTimeValidatorProvider())
                 .addListener(new NotNullInvocationListener())
                 .addListener(new DurationInvocationListener())
+                .addListener(new ResponseSizeInvocationListener())
+                .addListener(new ResponseArgumentsInvocationListener())
                 .addListener(new ResponseHeadersInvocationListener())
                 .build();
 

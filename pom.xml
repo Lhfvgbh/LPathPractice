@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <jagger.version>2.0</jagger.version>
+        <jagger.version>2.0.1-m3</jagger.version>
         <jagger.targetJdkVersion>1.8</jagger.targetJdkVersion>
         <spring.version>5.2.0.RELEASE</spring.version>
     </properties>
@@ -77,11 +77,11 @@
             <version>${jagger.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.griddynamics.jagger</groupId>
             <artifactId>chassis.spring.schema</artifactId>
             <version>${jagger.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.griddynamics.jagger</groupId>
@@ -89,17 +89,17 @@
             <version>${jagger.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.griddynamics.jagger</groupId>
             <artifactId>chassis.invokers</artifactId>
             <version>${jagger.version}</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.griddynamics.jagger</groupId>
             <artifactId>chassis.util</artifactId>
             <version>${jagger.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.griddynamics.jagger</groupId>

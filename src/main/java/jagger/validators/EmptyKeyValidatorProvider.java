@@ -7,7 +7,9 @@ import com.griddynamics.jagger.invoker.v2.JHttpEndpoint;
 import com.griddynamics.jagger.invoker.v2.JHttpQuery;
 import com.griddynamics.jagger.invoker.v2.JHttpResponse;
 
-public class ResponseTimeValidatorProvider implements ResponseValidatorProvider {
+import java.util.Map;
+
+public class EmptyKeyValidatorProvider implements ResponseValidatorProvider {
 
     @Override
     public ResponseValidator<JHttpQuery, JHttpEndpoint, JHttpResponse> provide(String taskId, String sessionId, NodeContext kernelContext) {
@@ -16,12 +18,14 @@ public class ResponseTimeValidatorProvider implements ResponseValidatorProvider 
 
             @Override
             public String getName() {
-                return "Request duration validator (Query took less than 4sec)";
+                return "Empty key validator";
             }
 
             @Override
             public boolean validate(JHttpQuery jHttpQuery, JHttpEndpoint jHttpEndpoint, JHttpResponse jHttpResponse, long l) {
-                return l < 4000;
+                Map map = jHttpQuery.getQueryParams();
+                String value = map.get("key").toString();
+                return !value.isEmpty();
             }
         };
     }

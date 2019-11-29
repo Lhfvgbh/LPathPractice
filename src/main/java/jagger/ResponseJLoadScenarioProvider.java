@@ -18,12 +18,12 @@ import com.griddynamics.jagger.user.test.configurations.termination.JTermination
 import com.griddynamics.jagger.user.test.configurations.termination.auxiliary.DurationInSeconds;
 import jagger.calculators.DurationInvocationListener;
 import jagger.calculators.ResponseContentLengthInvocationListener;
+import jagger.calculators.ResponseSizeInvocationListener;
 import jagger.providers.DefaultInvokerProvider;
 import jagger.providers.EndpointsProvider;
 import jagger.providers.QueryProvider;
 import jagger.util.TestProperties;
-import jagger.validators.JSONResponseTypeValidatorProvider;
-import jagger.validators.ResponseTimeValidatorProvider;
+import jagger.validators.EmptyKeyValidatorProvider;
 import jagger.validators.StatusCodeValidatorProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -47,10 +47,10 @@ public class ResponseJLoadScenarioProvider {
                 .withLoadBalancer(new OneByOneLoadBalancer())
                 .addValidator(DefaultResponseValidatorProvider.of(NotNullResponseValidator.class))
                 .addValidator(new StatusCodeValidatorProvider())
-                .addValidator(new JSONResponseTypeValidatorProvider())
-                .addValidator(new ResponseTimeValidatorProvider())
+                .addValidator(new EmptyKeyValidatorProvider())
                 .addListener(new NotNullInvocationListener())
                 .addListener(new DurationInvocationListener())
+                .addListener(new ResponseSizeInvocationListener())
                 .addListener(new ResponseContentLengthInvocationListener())
                 .build();
 

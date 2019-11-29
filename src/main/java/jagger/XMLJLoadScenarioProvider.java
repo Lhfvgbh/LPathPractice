@@ -16,12 +16,12 @@ import com.griddynamics.jagger.user.test.configurations.load.auxiliary.NumberOfU
 import com.griddynamics.jagger.user.test.configurations.termination.JTerminationCriteriaDuration;
 import com.griddynamics.jagger.user.test.configurations.termination.auxiliary.DurationInSeconds;
 import jagger.calculators.DurationInvocationListener;
+import jagger.calculators.ResponseSizeInvocationListener;
 import jagger.calculators.XMLItemsInvocationListener;
 import jagger.providers.DefaultInvokerProvider;
 import jagger.providers.EndpointsProvider;
 import jagger.providers.QueryProvider;
 import jagger.util.TestProperties;
-import jagger.validators.ResponseTimeValidatorProvider;
 import jagger.validators.StatusCodeValidatorProvider;
 import jagger.validators.XMLResponseTypeValidatorProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +50,9 @@ public class XMLJLoadScenarioProvider {
                                         .addValidator(DefaultResponseValidatorProvider.of(NotNullResponseValidator.class))
                                         .addValidator(new StatusCodeValidatorProvider())
                                         .addValidator(new XMLResponseTypeValidatorProvider())
-                                        .addValidator(new ResponseTimeValidatorProvider())
                                         .addListener(new NotNullInvocationListener())
                                         .addListener(new DurationInvocationListener())
+                                        .addListener(new ResponseSizeInvocationListener())
                                         .addListener(new XMLItemsInvocationListener())
                                         .build(),
                                 JLoadProfileUserGroups
@@ -66,7 +66,7 @@ public class XMLJLoadScenarioProvider {
                                                         .build(),
                                                 JLoadProfileUsers
                                                         .builder(NumberOfUsers.of(1)) //1user
-                                                        .withStartDelayInSeconds(properties.getXmlTestUserDelay() * 2) //40sec
+                                                        .withStartDelayInSeconds(properties.getXmlTestUserDelay() * 2)//40sec
                                                         .build()
                                         )
                                         .withDelayBetweenInvocationsInMilliseconds(properties.getXmlTestInvocationDelay()) //15sec
