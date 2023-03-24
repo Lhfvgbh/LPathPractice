@@ -12,7 +12,7 @@
     <properties>
         <jagger.version>2.0.1-m3</jagger.version>
         <jagger.targetJdkVersion>1.8</jagger.targetJdkVersion>
-        <spring.version>5.2.0.RELEASE</spring.version>
+        <spring.version>5.2.23.RELEASE</spring.version>
     </properties>
 
     <build>
